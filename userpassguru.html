@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USERNAME & PASSWORD RDM SEMESTER GANJIL - GENAP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #388E3C;
+            --text-color: #333;
+            --header-bg: #212121;
+            --card-bg: #ffffff;
+            --border-color: #ddd;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: #ffffff;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px var(--shadow-light);
+            border-bottom: 5px solid var(--primary-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 2rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px var(--shadow-light);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 40px 14px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1.1em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Styling untuk tombol X di dalam kotak pencarian */
+        .clear-search {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: none;
+            padding: 5px;
+            z-index: 2;
+        }
+
+        .clear-search:hover {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: var(--card-bg);
+        }
+
+        table thead th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s ease;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table tbody td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        #passwordPopup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-content h2 {
+            margin-top: 0;
+            color: var(--text-color);
+            font-size: 1.5rem;
+        }
+
+        .password-container {
+            position: relative;
+            display: inline-block;
+            width: 70%;
+            margin: 15px 0;
+        }
+
+        .popup-content input[type="password"],
+        .popup-content input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            padding-right: 40px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .popup-content button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .popup-content button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        #mainContent {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .card {
+                padding: 20px;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            .search-box input {
+                font-size: 1em;
+                padding: 12px 35px 12px 15px; /* Penyesuaian padding untuk tombol X */
+            }
+
+            .clear-search {
+                right: 10px; /* Penyesuaian untuk layar kecil */
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            table tbody tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            }
+
+            table tbody td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            table tbody td:before {
+                position: absolute;
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: var(--secondary-color);
+            }
+
+            table tbody td:nth-of-type(1):before { content: "NO."; }
+            table tbody td:nth-of-type(2):before { content: "USERNAME"; }
+            table tbody td:nth-of-type(3):before { content: "NAMA"; }
+            table tbody td:nth-of-type(4):before { content: "PASSWORD"; }
+            table tbody td:nth-of-type(5):before { content: "WALI KELAS"; }
+
+            table tbody td:last-child {
+                border-bottom: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 15px auto;
+                padding: 0 10px;
+            }
+
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            header p {
+                font-size: 0.9em;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .password-container {
+                width: 60%;
+            }
+
+            .clear-search {
+                right: 10px; /* Penyesuaian untuk layar kecil */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="passwordPopup">
+        <div class="popup-content">
+            <h2>Masukkan Password</h2>
+            <div class="password-container">
+                <input type="password" id="passwordInput" placeholder="Ketik password...">
+                <span class="toggle-password" onclick="togglePassword()">
+                    <i id="eyeIcon" class="fas fa-eye"></i>
+                </span>
+            </div>
+            <button onclick="checkPassword()">Masuk</button>
+            <p id="errorMessage" class="error-message">Password salah! Silakan coba lagi.</p>
+        </div>
+    </div>
+
+    <div id="mainContent">
+        <header>
+            <h1>USERNAME & PASSWORD RDM SEMESTER GANJIL - GENAP</h1>
+            <p>MA. AHLUSSUNNAH WALJAMAAH AMBUNTEN</p>
+            <p>TAHUN PELAJARAN 2024/2025</p>
+        </header>
+
+        <div class="container">
+            <div class="card">
+                <div class="search-box">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari data (Nama, Username, dll.)...">
+                        <button class="clear-search" id="clearSearch" onclick="clearSearchInput()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>USERNAME</th>
+                                <th>NAMA</th>
+                                <th>PASSWORD</th>
+                                <th>WALI KELAS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>20530406175001</td><td>KH. Mohammad Uways, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>2</td><td>5048754657200003</td><td>Abdul Hayyi, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>3</td><td>9955762663110042</td><td>Ahmad Fauzi, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>4</td><td>20530406192005</td><td>Ahmad Fawaid Nuriansyah, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>5</td><td>7063752653200003</td><td>Akhmad Kusyairi, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>6</td><td>8455759660300012</td><td>Angelia Ariani Dewi, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>7</td><td>1234751653200033</td><td>Busro, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>8</td><td>3347759660300093</td><td>Dewi Rahmatul Fawaiz, SH.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>9</td><td>0854743644300032</td><td>Dra. Naimatun Aliyah</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>10</td><td>2247764666200023</td><td>Drs. H. Akhmad Kandar</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>11</td><td>20530406197001</td><td>Dyah Ayu Kusuma Wardani, S.Pd.</td><td>rdm1234</td><td>X.1</td></tr>
+                            <tr><td>12</td><td>7563747650200143</td><td>Fajar, S.Pd.I.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>13</td><td>1649748652200012</td><td>Hasan Baisuni, S.Pd.I.</td><td>rdm1234</td><td>XI.IPS.1</td></tr>
+                            <tr><td>14</td><td>7940752654300062</td><td>Hj. Nur Aini, S.Ag.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>15</td><td>20592646194002</td><td>Ika Rubaisih, S.Si.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>16</td><td>1150757658300063</td><td>Insiyah, S.Pd.</td><td>rdm1234</td><td>X.2</td></tr>
+                            <tr><td>17</td><td>8546762664200033</td><td>Kamarudin, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>18</td><td>8956761662300092</td><td>Khoiril Bariyah, S.Pd.</td><td>rdm1234</td><td>XII.IPS.1</td></tr>
+                            <tr><td>19</td><td>4761765666300072</td><td>Kreislina Dewi Wijayanti, S.Pd.</td><td>rdm1234</td><td>XI.MIPA.1</td></tr>
+                            <tr><td>20</td><td>8446748650200032</td><td>Ladim, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>21</td><td>20530406192003</td><td>Marzuki, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>22</td><td>7953759660200022</td><td>Mastur, S.Pd.I.</td><td>rdm1234</td><td>X.3</td></tr>
+                            <tr><td>23</td><td>3545756660200003</td><td>Moh. Abu Salim, S. Pd.I.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>24</td><td>0533745648200062</td><td>Moh. Nasir, S.Pd.I.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>25</td><td>9559762664200022</td><td>Moh. Santoso, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>26</td><td>20530406192002</td><td>Muhlas Fuadi, S.Sos.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>27</td><td>20530406191001</td><td>Musthafa Lutfi, S.Pd.I.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>28</td><td>20530406188001</td><td>Mutammimah, S.Pd.</td><td>rdm1234</td><td>XII.IPS.2</td></tr>
+                            <tr><td>29</td><td>20530406189001</td><td>Nur Eka Setiawati, S.Pd.I.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>30</td><td>5854764665210122</td><td>Nurul Istiqomah, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>31</td><td>3946763664120002</td><td>Razali, S.Pd.I.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>32</td><td>6036756659200013</td><td>Saidi, S.Pd.I.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>33</td><td>20530406191003</td><td>Shelvi Devita Ningrum, S.Pd.</td><td>rdm1234</td><td>XII.MIPA.1</td></tr>
+                            <tr><td>34</td><td>0536759661200043</td><td>Suhaidi, S.Pd.I.</td><td>rdm1234</td><td>XI.IPS.2</td></tr>
+                            <tr><td>35</td><td>20530406192001</td><td>Susi Ayu Sulistiyawati, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>36</td><td>20530406191002</td><td>Syafaat, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                            <tr><td>37</td><td>20530406192004</td><td>Syarif Hidayatullah Fajar, S.Pd.</td><td>rdm1234</td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("passwordInput");
+            const eyeIcon = document.getElementById("eyeIcon");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+
+        function checkPassword() {
+            const passwordInput = document.getElementById("passwordInput").value;
+            const correctPassword = "userguruma";
+            const errorMessage = document.getElementById("errorMessage");
+            const passwordPopup = document.getElementById("passwordPopup");
+            const mainContent = document.getElementById("mainContent");
+
+            if (passwordInput === correctPassword) {
+                passwordPopup.style.display = "none";
+                mainContent.style.display = "block";
+            } else {
+                errorMessage.style.display = "block";
+                document.getElementById("passwordInput").value = "";
+            }
+        }
+
+        function searchTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("dataTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+
+            const clearButton = document.getElementById("clearSearch");
+            clearButton.style.display = input.value.length > 0 ? "block" : "none";
+        }
+
+        function clearSearchInput() {
+            const searchInput = document.getElementById("searchInput");
+            searchInput.value = "";
+            document.getElementById("clearSearch").style.display = "none";
+            searchTable();
+        }
+
+        document.getElementById("passwordInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
