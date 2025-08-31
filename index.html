@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="cache-control" content="no-store, max-age=0" />
+    <meta name="robots" content="noindex" />
+    <title>YPP Ahlussunnah Waljamaah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --button2: #8b5cf6; /* New color for Rekap Nilai RDM MA */
+            --button2-dark: #6d28d9; /* Darker shade for hover */
+            --button3: #ec4899; /* New color for UserPassword Guru */
+            --button3-dark: #be185d; /* Darker shade for hover */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin: 1rem;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 1.2rem;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 50%;
+            padding: 0.4rem;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            transform: rotate(15deg);
+            animation: pulse 2s infinite;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(to right, #fff, #dbeafe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #e5e7eb;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin: 1.2rem 0;
+            font-size: 0.95rem;
+            text-align: left;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-box p {
+            margin-bottom: 0.8rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .contact-info {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1.5rem;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-button:active {
+            transform: translateY(1px);
+        }
+
+        .cta-button i {
+            margin-right: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .progress-container {
+            width: 100%;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            color: #d1d5db;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 75%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 3px;
+            animation: progressAnimation 2s ease-in-out;
+        }
+
+        .countdown {
+            margin-top: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem;
+            border-radius: 6px;
+            min-width: 60px;
+        }
+
+        .countdown-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #d1d5db;
+            margin-top: 0.2rem;
+        }
+
+        .wave-bg {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113.64,28.07,1200,40.55V0Z" fill="rgba(255,255,255,0.15)"/></svg>');
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        /* Popup (Modal) Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-content h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .modal-button {
+            padding: 0.7rem;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-button.button1 {
+            background: var(--primary);
+        }
+
+        .modal-button.button1:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-button.button2 {
+            background: var(--button2);
+        }
+
+        .modal-button.button2:hover {
+            background: var(--button2-dark);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-button.button3 {
+            background: var(--button3);
+        }
+
+        .modal-button.button3:hover {
+            background: var(--button3-dark);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-button:active {
+            transform: translateY(1px);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(15deg) scale(1); }
+            50% { transform: rotate(15deg) scale(1.05); }
+            100% { transform: rotate(15deg) scale(1); }
+        }
+
+        @keyframes progressAnimation {
+            from { width: 0; }
+            to { width: 75%; }
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 1.2rem;
+                margin: 0.8rem;
+                border-radius: 12px;
+            }
+
+            .title {
+                font-size: 1.7rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+                max-width: 90%;
+            }
+
+            .logo {
+                width: 90px;
+                height: 90px;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+                gap: 0.6rem;
+            }
+
+            .countdown-item {
+                min-width: 55px;
+                padding: 0.5rem;
+            }
+
+            .countdown-value {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 1rem;
+                margin: 0.6rem;
+            }
+
+            .title {
+                font-size: 1.4rem;
+            }
+
+            .subtitle {
+                font-size: 0.85rem;
+            }
+
+            .info-box {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            .badge {
+                font-size: 0.55rem;
+                padding: 0.25rem 0.7rem;
+            }
+
+            .social-link {
+                width: 32px;
+                height: 32px;
+            }
+
+            .modal-content {
+                width: 90%;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wave-bg"></div>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhVF7pxdWpQXijrbo2OylMkwL-90IuJU9l86q9-LuHrQtCYQ6dMD5tSIN-vFevd7WjXnKIV4axoagDW5IiL_Dq1wZ_RtfFfVW9OkQgXHiIZ8hh_0P7f7vrm1IFcCa5L7Qjvy3lFqniD80gjByVGXLSqRnR6hcD7s0QXxZpqtkFjUBJYkOfFe6VVdcOp4HU=s200" alt="Logo YPP Ahlussunnah Waljamaah" class="logo">
+            <div class="badge">Coming Soon</div>
+        </div>
+        
+        <h1 class="title">YPP Ahlussunnah Waljamaah</h1>
+        <p class="subtitle">Kami sedang membangun sesuatu yang <span class="highlight">istimewa</span> untuk Anda! Situs kami dalam pengembangan untuk memberikan pengalaman terbaik dalam menyebarkan nilai-nilai Islam Ahlussunnah Waljamaah.</p>
+        
+        <div class="info-box">
+            <p><i class="fas fa-mosque" style="color: var(--secondary); margin-right: 0.5rem;"></i> <strong>Yayasan Pondok Pesantren Ahlussunnah Waljamaah (YPPASWAJ) Ambunten Sumenep</strong> berkomitmen untuk menyebarkan nilai-nilai keislaman yang rahmatan lil 'alamin melalui pendidikan, dakwah, dan kegiatan sosial.</p>
+            <p><i class="fas fa-lightbulb" style="color: var(--secondary); margin-right: 0.5rem;"></i> Kami sedang mempersiapkan platform digital yang akan menyediakan informasi terkini, program unggulan, dan berbagai layanan untuk mendukung misi dakwah dan pendidikan kami.</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-text">
+                <span>Progress Pengembangan</span>
+                <span>65%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-value" id="days">00</div>
+                <div class="countdown-label">Hari</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="hours">00</div>
+                <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="minutes">00</div>
+                <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="seconds">00</div>
+                <div class="countdown-label">Detik</div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <button class="cta-button" onclick="showModal()">
+                <i class="fas fa-school"></i> RDM MA
+            </button>
+            <a href="https://rdmmts.yppaswajamb.my.id/" class="cta-button" target="_blank">
+                <i class="fas fa-school"></i> RDM MTS
+            </a>
+            <a href="mailto:info@yppaswajamb.my.id" class="cta-button">
+                <i class="fas fa-envelope"></i> Hubungi Kami
+            </a>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://www.facebook.com/aswajofficial/" class="social-link" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/aswajofficial/" class="social-link" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@aswajofficial2494" class="social-link" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@aswajofficial" class="social-link" aria-label="TikTok" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="rdmModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">×</button>
+            <h3>Pilih Opsi RDM MA</h3>
+            <div class="modal-buttons">
+                <a href="https://rdmma.yppaswajamb.my.id/" class="modal-button button1" target="_blank">Link RDM MA</a>
+                <a href="https://rdmma.yppaswajamb.my.id/rekapnilai" class="modal-button button2" target="_blank">Rekap Nilai RDM MA</a>
+                <a href="https://rdmma.yppaswajamb.my.id/rekapnilai/userpassguru.html" class="modal-button button3" target="_blank">UserPassword Guru</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer (set to 30 days from now)
+        const countdownDate = new Date();
+        countdownDate.setDate(countdownDate.getDate() + 30);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+        
+        updateCountdown();
+        const countdownTimer = setInterval(updateCountdown, 1000);
+
+        // Modal Functions
+        function showModal() {
+            document.getElementById('rdmModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('rdmModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById('rdmModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
